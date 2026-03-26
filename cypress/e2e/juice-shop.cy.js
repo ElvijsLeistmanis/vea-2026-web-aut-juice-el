@@ -1,4 +1,6 @@
-import { HomePage } from '../pageObjects/HomePage';
+import { HomePage } from '../pageObjects/homePage.js'
+import { LoginPage } from '../pageObjects/loginPage.js';
+import { RegistrationPage } from '../pageObjects/userRegistrationPage.js';
 
 describe('Juice-shop scenarios', () => {
   context('Without auto login', () => {
@@ -10,31 +12,63 @@ describe('Juice-shop scenarios', () => {
 
     it('Login', () => {
       // Click Account button
+      HomePage.accountButton.click();
       // Click Login button
+      HomePage.loginButton.click();
       // Set email value to "demo"
+      LoginPage.emailField.type('demo');
       // Set password value to "demo"
+      LoginPage.passwordField.type('demo');
       // Click Log in
+      LoginPage.loginButton.click();
       // Click Account button
+      HomePage.accountButton.click();
       // Validate that "demo" account name appears in the menu section
+      HomePage.userProfileButton.should('contain.text', 'demo');
     });
 
-    it('Registration', () => {
+    it.only('Registration', () => {
       // Click Account button
+      HomePage.accountButton.click();
+
       // Login button
+      HomePage.loginButton.click();
+
       // Click "Not yet a customer?"
+      LoginPage.notYetACustomerLink.click();
+
       // Find - how to generate random number in JS
       // Use that number to genarate unique email address, e.g.: email_7584@ebox.com
       // Save that email address to some variable
+      const randomNumber = Math.floor(Math.random() * 10000);
+      const email = `email_${randomNumber}@gmail.com`;
+      RegistrationPage.emailField.type(email);
+
       // Fill in password field and repeat password field with same password
+      const password = 'password123';
+      RegistrationPage.passwordField.type(password);
+      RegistrationPage.repeatPasswordField.type(password)
+
       // Click on Security Question menu
       // Select  "Name of your favorite pet?"
       // Fill in answer
+      RegistrationPage.securityQuestionDropdown.click();
+      RegistrationPage.securityQuestionOptions.contains('Name of your favorite pet?').click();
+      RegistrationPage.answerField.type('Golden Labrador');
+
       // Click Register button
+      RegistrationPage.registerButton.click();
+
       // Set email value to previously created email
+      LoginPage.emailField.type(email)
       // Set password value to previously used password value
+      LoginPage.passwordField.type(password)
       // Click login button
+      LoginPage.loginButton.click()
       // Click Account button
+      HomePage.accountButton.click()
       // Validate that account name (with previously created email address) appears in the menu section
+      HomePage.userProfileButton.should('contain.text', email)
     });
   });
 
