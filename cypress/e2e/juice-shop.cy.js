@@ -265,9 +265,13 @@ describe('Juice-shop scenarios', () => {
       // Fill in Card Number
       SavedPaymentMethods.cardNumberField.type("1234567898765432")
       // Set expiry month to 7
+      SavedPaymentMethods.expiryMonthField.select("7")
       // Set expiry year to 2090
+      SavedPaymentMethods.expiryYearField.select("2090")
       // Click Submit button
+      SavedPaymentMethods.submitButton.click()
       // Validate that the card shows up in the list
+      SavedPaymentMethods.cardList.should('contain.text', 'John')
     })
   });
 });
