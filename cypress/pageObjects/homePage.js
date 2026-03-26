@@ -52,4 +52,12 @@ export class HomePage extends BasePage {
   static get reviewList() {
     return cy.get('#cdk-accordion-child-0');
   }
+  
+  static get reviewField() {
+    return cy.get('textarea[aria-label="Text field to review a product"]')
+  }
+
+  static get submitReviewButton() {
+    return cy.get('#submitButton')
+  }
 }
