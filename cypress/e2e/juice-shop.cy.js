@@ -1,10 +1,12 @@
 import { BasketPage } from '../pageObjects/basketPage.js';
+import { CreateAddressPage } from '../pageObjects/createAddressPage.js';
 import { DeliveryMethodPage } from '../pageObjects/deliveryMethodPage.js';
 import { HomePage } from '../pageObjects/homePage.js'
 import { LoginPage } from '../pageObjects/loginPage.js';
 import { OrderCompletionPage } from '../pageObjects/orderCompletionPage.js';
 import { OrderSummaryPage } from '../pageObjects/orderSummaryPage.js';
 import { PaymentOptionsPage } from '../pageObjects/paymentOptionsPage.js';
+import { SavedAddressesPage } from '../pageObjects/savedAddressesPage.js';
 import { SelectAddressPage } from '../pageObjects/selectAddressPage.js';
 import { RegistrationPage } from '../pageObjects/userRegistrationPage.js';
 
@@ -186,7 +188,7 @@ describe('Juice-shop scenarios', () => {
     });
     
     // Create scenario - Buy Girlie T-shirt
-    it.only('Buy Girlie T-shirt', () => {
+    it('Buy Girlie T-shirt', () => {
       // Click on search icon
       HomePage.searchIcon.click();
       // Search for Girlie
@@ -220,18 +222,32 @@ describe('Juice-shop scenarios', () => {
       // Validate confirmation - "Thank you for your purchase!"
       OrderCompletionPage.orderCompleted.should('contain.text', "Thank you for your purchase!")
     })
-    
 
     // Create scenario - Add address
-    // Click on Account
-    // Click on Orders & Payment
-    // Click on My saved addresses
-    // Create page object - SavedAddressesPage
-    // Click on Add New Address
-    // Create page object - CreateAddressPage
-    // Fill in the necessary information
-    // Click Submit button
-    // Validate that previously added address is visible
+    it.only('Add address', () => {
+      // Click on Account
+      HomePage.accountButton.click();
+      // Click on Orders & Payment
+      HomePage.ordersAndPayment.click();
+      // Click on My saved addresses
+      HomePage.savedAddressesButton.click()
+      // Create page object - SavedAddressesPage
+      // Click on Add New Address
+      SavedAddressesPage.addAddressButton.click()
+      // Create page object - CreateAddressPage
+      // Fill in the necessary information
+      CreateAddressPage.countryField.type("Latvia");
+      CreateAddressPage.nameField.type("John")
+      CreateAddressPage.mobileNumberField.type("29182183")
+      CreateAddressPage.zipCodeField.type("LV-1999")
+      CreateAddressPage.addressField.type("Test Iela 5-1")
+      CreateAddressPage.cityField.type("Riga")
+      // Click Submit button
+      CreateAddressPage.submitButton.click()
+      // Validate that previously added address is visible
+      SavedAddressesPage.savedAddressList.should('contain.text', 'Latvia')
+    })
+  
 
     // Create scenario - Add payment option
     // Click on Account
