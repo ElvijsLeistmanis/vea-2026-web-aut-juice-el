@@ -73,4 +73,12 @@ export class HomePage extends BasePage {
   static get itemsPerPageList() {
     return cy.get('[class="mat-mdc-paginator-touch-target"]').get('[class="mdc-list-item__primary-text"]')
   }
+
+  static get purchaseButton() {
+    return cy.get('[class="mat-grid-tile ng-star-inserted"]').find('button[aria-label="Add to Basket"]')
+  }
+
+  static get basketButton() {
+    return cy.get('button[aria-label="Show the shopping cart"]')
+  }
 }
