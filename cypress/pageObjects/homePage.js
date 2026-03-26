@@ -60,4 +60,17 @@ export class HomePage extends BasePage {
   static get submitReviewButton() {
     return cy.get('#submitButton')
   }
+
+  static get allProductsList() {
+    return cy.get('[class="mat-grid-tile ng-star-inserted"]')
+  }
+
+  static get itemsPerPageDropdown() {
+    return cy.get('[class="mat-mdc-paginator-touch-target"]')
+  }
+
+  //I don't think this is the "correct" way to do this but.. if it works, it works.
+  static get itemsPerPageList() {
+    return cy.get('[class="mat-mdc-paginator-touch-target"]').get('[class="mdc-list-item__primary-text"]')
+  }
 }
