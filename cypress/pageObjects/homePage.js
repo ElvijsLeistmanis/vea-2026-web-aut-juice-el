@@ -44,4 +44,12 @@ export class HomePage extends BasePage {
   static get closeButton() {
     return cy.get('.close-dialog');
   }
+
+  static get reviewDropdown() {
+    return cy.get('mat-expansion-panel-header');
+  }
+
+  static get reviewList() {
+    return cy.get('#cdk-accordion-child-0');
+  }
 }
