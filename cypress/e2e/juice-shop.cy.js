@@ -7,6 +7,7 @@ import { OrderCompletionPage } from '../pageObjects/orderCompletionPage.js';
 import { OrderSummaryPage } from '../pageObjects/orderSummaryPage.js';
 import { PaymentOptionsPage } from '../pageObjects/paymentOptionsPage.js';
 import { SavedAddressesPage } from '../pageObjects/savedAddressesPage.js';
+import { SavedPaymentMethods } from '../pageObjects/savedPaymentMethods.js';
 import { SelectAddressPage } from '../pageObjects/selectAddressPage.js';
 import { RegistrationPage } from '../pageObjects/userRegistrationPage.js';
 
@@ -224,7 +225,7 @@ describe('Juice-shop scenarios', () => {
     })
 
     // Create scenario - Add address
-    it.only('Add address', () => {
+    it('Add address', () => {
       // Click on Account
       HomePage.accountButton.click();
       // Click on Orders & Payment
@@ -248,19 +249,25 @@ describe('Juice-shop scenarios', () => {
       SavedAddressesPage.savedAddressList.should('contain.text', 'Latvia')
     })
   
-
     // Create scenario - Add payment option
-    // Click on Account
-    // Click on Orders & Payment
-    // Click on My payment options
-    // Create page object - SavedPaymentMethodsPage
-    // Click Add new card
-    // Fill in Name
-    // Fill in Card Number
-    // Set expiry month to 7
-    // Set expiry year to 2090
-    // Click Submit button
-    // Validate that the card shows up in the list
-
+    it.only('Add payment option', () => {
+      // Click on Account
+      HomePage.accountButton.click()
+      // Click on Orders & Payment
+      HomePage.ordersAndPayment.click()
+      // Click on My payment options
+      HomePage.savedPaymentOptions.click()
+      // Create page object - SavedPaymentMethodsPage
+      // Click Add new card
+      SavedPaymentMethods.addCardButton.click()
+      // Fill in Name
+      SavedPaymentMethods.nameField.type("John")
+      // Fill in Card Number
+      SavedPaymentMethods.cardNumberField.type("1234567898765432")
+      // Set expiry month to 7
+      // Set expiry year to 2090
+      // Click Submit button
+      // Validate that the card shows up in the list
+    })
   });
 });
